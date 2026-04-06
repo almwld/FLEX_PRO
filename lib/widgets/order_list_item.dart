@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/order_model.dart';
-import '../theme/app_theme.dart';
 
 class OrderListItem extends StatelessWidget {
   final OrderModel order;
@@ -18,7 +17,7 @@ class OrderListItem extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isDark ? AppTheme.darkSurface : Colors.white,
+          color: isDark ? Colors.grey[850] : Colors.white,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -37,9 +36,9 @@ class OrderListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('طلب #${order.orderNumber}', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('طلب #${order.orderNumber}', style: const TextStyle(fontWeight: FontWeight.bold)),
                   Text('${order.items.length} منتج - ${order.total.toStringAsFixed(0)} ر.ي',
-                      style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      style: const TextStyle(fontSize: 12, color: Colors.grey)),
                 ],
               ),
             ),

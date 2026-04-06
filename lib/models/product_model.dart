@@ -81,8 +81,8 @@ class ProductModel {
     'reviewCount': reviewCount,
     'createdAt': createdAt.toIso8601String(),
   };
-}
 
+  // ✅ copyWith صحيح
   ProductModel copyWith({
     bool? isFavorite,
   }) {
@@ -105,3 +105,4 @@ class ProductModel {
       createdAt: createdAt,
     );
   }
+}
