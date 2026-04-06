@@ -184,8 +184,7 @@ class WalletProvider extends ChangeNotifier {
   }
 }
 
-  Future<void> loadTransactions() async {
-  }
+
 
   Future<void> loadTransactions() async {
     await loadWallet();
