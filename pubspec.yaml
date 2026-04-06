@@ -1,6 +1,5 @@
-name: flex_yemen
-description: Flex Yemen - تطبيق المحفظة الرقمية والتجارة الإلكترونية
-publish_to: 'none'
+name: phi3_agent
+description: Simple AI Agent
 version: 1.0.0+1
 
 environment:
@@ -9,23 +8,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.6
-  provider: ^6.1.1
-  shared_preferences: ^2.2.2
-  flutter_secure_storage: ^9.0.0
+  sqflite: ^2.3.0
+  path_provider: ^2.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
-
-flutter_launcher_icons:
-  android: true
-  ios: false
-  image_path: "assets/icons/icon.png"
-  adaptive_icon_background: "#D4AF37"
-  adaptive_icon_foreground: "assets/icons/icon.png"
-  min_sdk_android: 21
+  assets:
+    - assets/models/
