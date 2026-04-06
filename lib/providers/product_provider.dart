@@ -78,7 +78,7 @@ class ProductProvider extends ChangeNotifier {
         page: page,
         limit: limit,
         categoryId: categoryId,
-        searchQuery: searchQuery,
+        
         filters: filters,
       );
 

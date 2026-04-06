@@ -284,7 +284,7 @@ class WalletProvider extends ChangeNotifier {
   }
 
   /// شراء بطاقة هدايا
-  Future<GiftCardModel?> buyGiftCard({
+  Future<GiftCardModel?> buyGiftCard(amount, {
     required double amount,
     String? message,
     String? recipientName,
@@ -299,7 +299,7 @@ class WalletProvider extends ChangeNotifier {
         return null;
       }
 
-      final giftCard = await _walletService.buyGiftCard(
+      final giftCard = await _walletService.buyGiftCard(amount, 
         amount: amount,
         message: message,
         recipientName: recipientName,

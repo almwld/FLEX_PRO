@@ -57,3 +57,8 @@ class ProductService {
     return [];
   }
 }
+
+  Future<List<ProductModel>> searchProducts(String query, {String? categoryId}) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return [];
+  }
