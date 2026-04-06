@@ -38,13 +38,8 @@ class WalletTransaction {
 
   bool get isIncoming => type == TransactionType.received || type == TransactionType.deposit;
   bool get isOutgoing => type == TransactionType.withdraw || type == TransactionType.transfer || type == TransactionType.payment;
-
-  Color get transactionColor {
-    if (isIncoming) return Colors.green;
-    if (isOutgoing) return Colors.red;
-    return Colors.orange;
-  }
-
+  Color get transactionColor => isIncoming ? Colors.green : isOutgoing ? Colors.red : Colors.orange;
+  
   IconData get transactionIcon {
     switch (type) {
       case TransactionType.deposit: return Icons.arrow_downward;
@@ -56,7 +51,7 @@ class WalletTransaction {
       case TransactionType.billPayment: return Icons.receipt_long;
     }
   }
-
+  
   String get typeText {
     switch (type) {
       case TransactionType.deposit: return 'إيداع';
@@ -68,7 +63,7 @@ class WalletTransaction {
       case TransactionType.billPayment: return 'دفع فاتورة';
     }
   }
-
+  
   String get statusText {
     switch (status) {
       case TransactionStatus.pending: return 'قيد المعالجة';
@@ -86,14 +81,7 @@ class OrderTracking {
   final String status;
   final String location;
   final DateTime timestamp;
-
-  OrderTracking({
-    required this.id,
-    required this.orderId,
-    required this.status,
-    required this.location,
-    required this.timestamp,
-  });
+  OrderTracking({required this.id, required this.orderId, required this.status, required this.location, required this.timestamp});
 }
 
 class WalletBalance {
@@ -101,15 +89,7 @@ class WalletBalance {
   final double yerBalance;
   final double sarBalance;
   final double usdBalance;
-  final double available;
-  
-  WalletBalance({
-    required this.total,
-    required this.yerBalance,
-    required this.sarBalance,
-    required this.usdBalance,
-    this.available = 0,
-  });
+  WalletBalance({required this.total, required this.yerBalance, required this.sarBalance, required this.usdBalance});
 }
 
 class BillModel {
@@ -117,15 +97,7 @@ class BillModel {
   final String title;
   final double amount;
   final DateTime dueDate;
-  final String? name;
-  
-  BillModel({
-    required this.id,
-    required this.title,
-    required this.amount,
-    required this.dueDate,
-    this.name,
-  });
+  BillModel({required this.id, required this.title, required this.amount, required this.dueDate});
 }
 
 class GiftCardModel {
@@ -133,58 +105,30 @@ class GiftCardModel {
   final String code;
   final double amount;
   final bool isUsed;
-  final String? currency;
-  
-  GiftCardModel({
-    required this.id,
-    required this.code,
-    required this.amount,
-    this.isUsed = false,
-    this.currency,
-  });
+  GiftCardModel({required this.id, required this.code, required this.amount, this.isUsed = false});
 }
 
 class PaymentMethod {
   final String id;
   final String name;
   final String type;
-  
   PaymentMethod({required this.id, required this.name, required this.type});
-  
-  String toJson() => id;
+  static const wallet = PaymentMethod(id: 'wallet', name: 'محفظة فلكس', type: 'wallet');
 }
 
 class WalletStats {
   final double totalSpent;
   final double totalReceived;
   final int transactionCount;
-  final int totalTransactions;
-  
-  WalletStats({
-    this.totalDeposits = 0,
-    required this.totalSpent,
-    required this.totalReceived,
-    required this.transactionCount,
-    this.totalTransactions = 0,
-  });
+  WalletStats({required this.totalSpent, required this.totalReceived, required this.transactionCount});
 }
 
 class WalletLimits {
   final double dailyLimit;
   final double monthlyLimit;
   final double perTransactionLimit;
-  
-  WalletLimits({
-    required this.dailyLimit,
-    required this.monthlyLimit,
-    required this.perTransactionLimit,
-  });
-  
-  static WalletLimits defaultLimits() => WalletLimits(
-    dailyLimit: 100000,
-    monthlyLimit: 1000000,
-    perTransactionLimit: 50000,
-  );
+  WalletLimits({required this.dailyLimit, required this.monthlyLimit, required this.perTransactionLimit});
+  static WalletLimits defaultLimits() => WalletLimits(dailyLimit: 100000, monthlyLimit: 1000000, perTransactionLimit: 50000);
 }
 
 class WalletModel {
@@ -192,59 +136,7 @@ class WalletModel {
   final double balance;
   final String currency;
   final bool isActive;
-  
-  WalletModel({
-    required this.id,
-    required this.balance,
-    required this.currency,
-    this.isActive = true,
-  });
-}
-
-// إضافة الدوال المفقودة
-extension WalletModelExtension on WalletModel {
+  WalletModel({required this.id, required this.balance, required this.currency, this.isActive = true});
   double get availableBalance => balance;
   bool hasSufficientBalance(double amount) => balance >= amount;
-}
-
-class WalletStats {
-  final double totalSpent;
-  final double totalReceived;
-  final int transactionCount;
-  final int totalTransactions;
-  final double totalDeposits;
-  
-  WalletStats({
-    required this.totalSpent,
-    required this.totalReceived,
-    required this.transactionCount,
-    this.totalTransactions = 0,
-    this.totalDeposits = 0,
-  });
-}
-
-class OrderTracking {
-  final String id;
-  final String orderId;
-  final String status;
-  final String location;
-  final DateTime timestamp;
-  final String? description;
-  
-  OrderTracking({
-    required this.id,
-    required this.orderId,
-    required this.status,
-    required this.location,
-    required this.timestamp,
-    this.description,
-  });
-}
-
-extension PaymentMethodValues on PaymentMethod {
-  static const wallet = PaymentMethod(id: 'wallet', name: 'محفظة فلكس', type: 'wallet');
-}
-
-extension PaymentMethodValues on PaymentMethod {
-  static const wallet = PaymentMethod(id: 'wallet', name: 'محفظة فلكس', type: 'wallet');
 }

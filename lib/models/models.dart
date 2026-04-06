@@ -1,4 +1,4 @@
-// جميع النماذج في ملف واحد لتجنب التضارب
+// تصدير جميع النماذج من مجلد واحد فقط
 export 'user_model.dart';
 export 'wallet_model.dart';
 export 'product_model.dart';
