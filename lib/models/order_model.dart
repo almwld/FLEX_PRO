@@ -57,6 +57,30 @@ class OrderModel {
     this.deliveredAt,
   });
 
+  Color get statusColor {
+    switch (status) {
+      case OrderStatus.pending: return Colors.orange;
+      case OrderStatus.processing: return Colors.blue;
+      case OrderStatus.confirmed: return Colors.green;
+      case OrderStatus.shipped: return Colors.purple;
+      case OrderStatus.delivered: return Colors.teal;
+      case OrderStatus.cancelled: return Colors.red;
+      case OrderStatus.completed: return Colors.green;
+    }
+  }
+
+  String get statusText {
+    switch (status) {
+      case OrderStatus.pending: return 'قيد المراجعة';
+      case OrderStatus.processing: return 'جاري التجهيز';
+      case OrderStatus.confirmed: return 'تم التأكيد';
+      case OrderStatus.shipped: return 'تم الشحن';
+      case OrderStatus.delivered: return 'تم التوصيل';
+      case OrderStatus.cancelled: return 'ملغي';
+      case OrderStatus.completed: return 'مكتمل';
+    }
+  }
+
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
       id: json['id'] ?? '',
@@ -76,7 +100,7 @@ class OrderModel {
       shippingCity: json['shippingCity'] ?? '',
       shippingPhone: json['shippingPhone'] ?? '',
       paymentMethod: json['paymentMethod'] ?? '',
-      paymentMethodText: json['paymentMethodText'] ?? json['paymentMethod'] ?? '',
+      paymentMethodText: json['paymentMethodText'] ?? '',
       trackingNumber: json['trackingNumber'],
       cancellationReason: json['cancellationReason'],
       createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : DateTime.now(),
@@ -85,55 +109,15 @@ class OrderModel {
       deliveredAt: json['deliveredAt'] != null ? DateTime.parse(json['deliveredAt']) : null,
     );
   }
-}
 
-  Color get statusColor {
-    switch (status) {
-      case OrderStatus.pending:
-        return Colors.orange;
-      case OrderStatus.processing:
-        return Colors.blue;
-      case OrderStatus.confirmed:
-        return Colors.green;
-      case OrderStatus.shipped:
-        return Colors.purple;
-      case OrderStatus.delivered:
-        return Colors.teal;
-      case OrderStatus.cancelled:
-        return Colors.red;
-      case OrderStatus.completed:
-        return Colors.green;
-    }
-  }
-
-  String get statusText {
-    switch (status) {
-      case OrderStatus.pending:
-        return 'قيد المراجعة';
-      case OrderStatus.processing:
-        return 'جاري التجهيز';
-      case OrderStatus.confirmed:
-        return 'تم التأكيد';
-      case OrderStatus.shipped:
-        return 'تم الشحن';
-      case OrderStatus.delivered:
-        return 'تم التوصيل';
-      case OrderStatus.cancelled:
-        return 'ملغي';
-      case OrderStatus.completed:
-        return 'مكتمل';
-    }
-  }
-
+  // ✅ copyWith صحيح
   OrderModel copyWith({
-    String? id,
-    String? orderNumber,
     OrderStatus? status,
     String? cancellationReason,
   }) {
     return OrderModel(
-      id: id ?? this.id,
-      orderNumber: orderNumber ?? this.orderNumber,
+      id: id,
+      orderNumber: orderNumber,
       userId: userId,
       items: items,
       subtotal: subtotal,
@@ -155,3 +139,4 @@ class OrderModel {
       deliveredAt: deliveredAt,
     );
   }
+}

@@ -26,6 +26,7 @@ class CartItemModel {
   double get itemTotal => price * quantity;
   double get totalSavings => originalPrice != null ? (originalPrice! - price) * quantity : 0;
   bool get hasDiscount => originalPrice != null && originalPrice! > price;
+  int get maxQuantity => 99;
 
   factory CartItemModel.fromProduct(dynamic product, {int quantity = 1}) {
     return CartItemModel(
@@ -39,6 +40,25 @@ class CartItemModel {
       total: (product.discountPrice ?? product.price) * quantity,
       marketId: product.marketId,
       marketName: product.marketName,
+    );
+  }
+
+  // ✅ copyWith صحيح
+  CartItemModel copyWith({
+    int? quantity,
+    double? total,
+  }) {
+    return CartItemModel(
+      id: id,
+      productId: productId,
+      productName: productName,
+      productImage: productImage,
+      price: price,
+      originalPrice: originalPrice,
+      quantity: quantity ?? this.quantity,
+      total: total ?? this.total,
+      marketId: marketId,
+      marketName: marketName,
     );
   }
 }
@@ -82,22 +102,3 @@ class CartModel {
     );
   }
 }
-
-  // إضافة maxQuantity
-  int get maxQuantity => 99;
-  
-  // إضافة copyWith
-  CartItemModel copyWith({int? quantity, double? total}) {
-    return CartItemModel(
-      id: id,
-      productId: productId,
-      productName: productName,
-      productImage: productImage,
-      price: price,
-      originalPrice: originalPrice,
-      quantity: quantity ?? this.quantity,
-      total: total ?? this.total,
-      marketId: marketId,
-      marketName: marketName,
-    );
-  }
