@@ -81,7 +81,14 @@ class OrderTracking {
   final String status;
   final String location;
   final DateTime timestamp;
-  OrderTracking({required this.id, required this.orderId, required this.status, required this.location, required this.timestamp, this.description});
+  
+  OrderTracking({
+    required this.id,
+    required this.orderId,
+    required this.status,
+    required this.location,
+    required this.timestamp,
+  });
 }
 
 class WalletBalance {
@@ -114,6 +121,7 @@ class PaymentMethod {
   final String type;
   PaymentMethod({required this.id, required this.name, required this.type});
   static PaymentMethod get wallet => PaymentMethod(id: 'wallet', name: 'محفظة فلكس', type: 'wallet');
+  String toJson() => id;
 }
 
 class WalletStats {
@@ -139,27 +147,4 @@ class WalletModel {
   WalletModel({required this.id, required this.balance, required this.currency, this.isActive = true});
   double get availableBalance => balance;
   bool hasSufficientBalance(double amount) => balance >= amount;
-}
-
-// تحديث OrderTracking مع description
-class OrderTracking {
-  final String id;
-  final String orderId;
-  final String status;
-  final String location;
-  final DateTime timestamp;
-  final String? description;
-  
-  OrderTracking({
-    required this.id,
-    required this.orderId,
-    required this.status,
-    required this.location,
-    required this.timestamp,
-    this.description,
-  });
-}
-
-extension PaymentMethodExtension on PaymentMethod {
-  String toJson() => id;
 }

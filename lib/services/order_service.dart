@@ -107,7 +107,7 @@ class OrderService {
       id: orderId,
       userId: 'user_1',
       orderNumber: 'ORD-${DateTime.now().year}-9999',
-      status: OrderStatus.processing,
+      status: 'processing',
       items: [
         OrderItemModel(
           id: 'item_1',
@@ -170,7 +170,7 @@ class OrderService {
       id: 'order_${DateTime.now().millisecondsSinceEpoch}',
       userId: 'user_1',
       orderNumber: 'ORD-${DateTime.now().year}-${DateTime.now().millisecondsSinceEpoch % 10000}',
-      status: OrderStatus.pending,
+      status: 'pending',
       items: items.map((item) => OrderItemModel(
         id: 'item_${item.id}',
         productId: item.productId,
@@ -215,7 +215,7 @@ class OrderService {
       OrderTracking(
         id: 'track_1',
         orderId: orderId,
-        status: OrderStatus.pending,
+        status: 'pending',
         description: 'تم استلام الطلب',
         location: 'المستودع الرئيسي',
         timestamp: DateTime.now().subtract(const Duration(days: 2)),
@@ -223,7 +223,7 @@ class OrderService {
       OrderTracking(
         id: 'track_2',
         orderId: orderId,
-        status: OrderStatus.processing,
+        status: 'processing',
         description: 'جاري معالجة الطلب',
         location: 'المستودع الرئيسي',
         timestamp: DateTime.now().subtract(const Duration(days: 1)),
@@ -231,7 +231,7 @@ class OrderService {
       OrderTracking(
         id: 'track_3',
         orderId: orderId,
-        status: OrderStatus.shipped,
+        status: 'shipped',
         description: 'تم شحن الطلب',
         location: 'مركز الشحن',
         timestamp: DateTime.now(),
