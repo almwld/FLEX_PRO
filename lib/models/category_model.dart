@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class CategoryModel {
   final String id;
   final String name;
@@ -10,6 +12,17 @@ class CategoryModel {
     this.imageUrl,
     this.parentId,
   });
+  
+  IconData get iconData {
+    switch (name) {
+      case 'إلكترونيات': return Icons.electrical_services;
+      case 'ملابس': return Icons.checkroom;
+      case 'أطعمة': return Icons.restaurant;
+      case 'منزل': return Icons.home;
+      case 'رياضة': return Icons.sports_soccer;
+      default: return Icons.category;
+    }
+  }
   
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     return CategoryModel(
@@ -27,25 +40,3 @@ class CategoryModel {
     'parentId': parentId,
   };
 }
-
-  IconData get iconData {
-    switch (name) {
-      case 'إلكترونيات': return Icons.electrical_services;
-      case 'ملابس': return Icons.checkroom;
-      case 'أطعمة': return Icons.restaurant;
-      case 'منزل': return Icons.home;
-      case 'رياضة': return Icons.sports_soccer;
-      default: return Icons.category;
-    }
-  }
-
-  IconData get iconData {
-    switch (name) {
-      case 'إلكترونيات': return Icons.electrical_services;
-      case 'ملابس': return Icons.checkroom;
-      case 'أطعمة': return Icons.restaurant;
-      case 'منزل': return Icons.home;
-      case 'رياضة': return Icons.sports_soccer;
-      default: return Icons.category;
-    }
-  }

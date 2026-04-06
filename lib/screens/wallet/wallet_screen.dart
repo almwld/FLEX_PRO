@@ -64,7 +64,6 @@ class _WalletScreenState extends State<WalletScreen> {
                 padding: const EdgeInsets.all(16),
                 child: _BalanceCard(
                   balance: walletProvider.balance,
-                  availableBalance: walletProvider.availableBalance,
                 ),
               ),
             ),

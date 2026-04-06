@@ -83,7 +83,7 @@ class _MarketScreenState extends State<MarketScreen> {
                     final category = productProvider.categories[index];
                     return _CategoryItem(
                       name: category.name,
-                      icon: category.iconData ?? Icons.category,
+                      icon: category.iconData,
                       onTap: () {
                         productProvider.filterByCategory(category.id);
                       },

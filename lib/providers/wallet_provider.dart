@@ -250,3 +250,9 @@ class WalletProvider extends ChangeNotifier {
   }
 
   double get availableBalance => balance;
+
+  Future<void> loadTransactions() async {
+    await _loadTransactions();
+  }
+  
+  double get availableBalance => _wallet?.balance ?? 0;
