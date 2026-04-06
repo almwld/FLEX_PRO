@@ -74,7 +74,7 @@ class CartProvider extends ChangeNotifier {
   int getProductQuantity(String productId) {
     final item = _items.firstWhere(
       (item) => item.productId == productId,
-      orElse: () => CartItemModel.fromProduct(
+      orElse: () => CartItemModel.fromProduct(product, quantity: quantity)
         id: '',
         productId: '',
         productName: '',
@@ -150,7 +150,7 @@ class CartProvider extends ChangeNotifier {
         }
       } else {
         // إضافة عنصر جديد
-        final newItem = CartItemModel.fromProduct(product, quantity: quantity);
+        final newItem = CartItemModel.fromProduct(product, quantity: quantity)product, quantity: quantity);
         _items.add(newItem);
       }
 

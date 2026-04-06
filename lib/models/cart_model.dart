@@ -82,3 +82,22 @@ class CartModel {
     );
   }
 }
+
+  // إضافة maxQuantity
+  int get maxQuantity => 99;
+  
+  // إضافة copyWith
+  CartItemModel copyWith({int? quantity, double? total}) {
+    return CartItemModel(
+      id: id,
+      productId: productId,
+      productName: productName,
+      productImage: productImage,
+      price: price,
+      originalPrice: originalPrice,
+      quantity: quantity ?? this.quantity,
+      total: total ?? this.total,
+      marketId: marketId,
+      marketName: marketName,
+    );
+  }

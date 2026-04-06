@@ -185,3 +185,17 @@ class WalletLimits {
     perTransactionLimit: 50000,
   );
 }
+
+class WalletModel {
+  final String id;
+  final double balance;
+  final String currency;
+  final bool isActive;
+  
+  WalletModel({
+    required this.id,
+    required this.balance,
+    required this.currency,
+    this.isActive = true,
+  });
+}
