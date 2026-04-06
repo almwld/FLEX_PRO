@@ -58,7 +58,7 @@ class OrderModel {
     this.shippedAt,
     this.deliveredAt,
     this.notes,
-    this.couponCode,
+    this.couponCode, this.updatedAt,
   });
 
   Color get statusColor {
@@ -147,3 +147,7 @@ class OrderModel {
     );
   }
 }
+
+  final DateTime? updatedAt;
+  
+  // إضافة updatedAt إلى constructor الحالي

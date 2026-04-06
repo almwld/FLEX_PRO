@@ -130,3 +130,31 @@ class CategoryModel {
     );
   }
 }
+
+class CategoryModel {
+  final String id;
+  final String name;
+  final String? imageUrl;
+  final String? parentId;
+  
+  CategoryModel({
+    required this.id,
+    required this.name,
+    this.imageUrl,
+    this.parentId,
+  });
+}
+
+class CategoryModel {
+  final String id;
+  final String name;
+  final String? imageUrl;
+  final String? parentId;
+  
+  CategoryModel({
+    required this.id,
+    required this.name,
+    this.imageUrl,
+    this.parentId,
+  });
+}

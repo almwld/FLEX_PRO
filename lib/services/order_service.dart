@@ -49,11 +49,9 @@ class OrderService {
           city: 'صنعاء',
           street: 'شارع تعز',
           createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
         ),
         paymentMethod: PaymentMethod.wallet,
         createdAt: DateTime.now().subtract(Duration(days: index)),
-        updatedAt: DateTime.now(),
       ),
     );
   }
@@ -93,11 +91,9 @@ class OrderService {
           city: 'صنعاء',
           street: 'شارع تعز',
           createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
         ),
         paymentMethod: PaymentMethod.wallet,
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
     );
   }
@@ -148,12 +144,10 @@ class OrderService {
         floor: '3',
         apartment: '5',
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
       paymentMethod: PaymentMethod.wallet,
       notes: 'ملاحظات على الطلب',
       createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
     );
   }
 
@@ -195,7 +189,6 @@ class OrderService {
       couponCode: couponCode,
       notes: notes,
       createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
     );
   }
 

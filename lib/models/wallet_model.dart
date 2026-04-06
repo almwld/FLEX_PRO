@@ -81,7 +81,7 @@ class OrderTracking {
   final String status;
   final String location;
   final DateTime timestamp;
-  OrderTracking({required this.id, required this.orderId, required this.status, required this.location, required this.timestamp});
+  OrderTracking({required this.id, required this.orderId, required this.status, required this.location, required this.timestamp, this.description});
 }
 
 class WalletBalance {
@@ -139,4 +139,23 @@ class WalletModel {
   WalletModel({required this.id, required this.balance, required this.currency, this.isActive = true});
   double get availableBalance => balance;
   bool hasSufficientBalance(double amount) => balance >= amount;
+}
+
+// تحديث OrderTracking مع description
+class OrderTracking {
+  final String id;
+  final String orderId;
+  final String status;
+  final String location;
+  final DateTime timestamp;
+  final String? description;
+  
+  OrderTracking({
+    required this.id,
+    required this.orderId,
+    required this.status,
+    required this.location,
+    required this.timestamp,
+    this.description,
+  });
 }
