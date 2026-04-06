@@ -305,7 +305,7 @@ class _BalanceCard extends StatelessWidget {
   final double balance;
   final double availableBalance;
 
-  const _BalanceCard({
+  const _BalanceCard({required this.availableBalance, 
     required this.balance,
     required this.availableBalance,
   });

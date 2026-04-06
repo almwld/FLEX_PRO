@@ -190,3 +190,7 @@ class WalletProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+  Future<void> loadTransactions() async {
+    await loadWallet();
+  }
