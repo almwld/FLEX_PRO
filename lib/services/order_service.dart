@@ -1,7 +1,8 @@
 import '../models/order_model.dart';
+import '../models/wallet_model.dart';
 
 class OrderService {
-  Future<List<OrderModel>> getOrders() async {
+  Future<List<OrderModel>> getOrders({int page = 1, int limit = 20, OrderStatus? status}) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return [];
   }
@@ -37,7 +38,7 @@ class OrderService {
     return [];
   }
   
-  Future<List<dynamic>> trackOrder(String orderId) async {
+  Future<List<OrderTracking>> trackOrder(String orderId) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return [];
   }

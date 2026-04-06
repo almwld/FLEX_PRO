@@ -48,7 +48,22 @@ class WalletService {
   
   Future<GiftCardModel?> buyGiftCard(double amount) async {
     await Future.delayed(const Duration(milliseconds: 500));
+    return GiftCardModel(id: '1', code: 'GIFT123', amount: amount);
+  }
+  
+  Future<bool> redeemGiftCard(String code) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return true;
+  }
+  
+  Future<WalletTransaction?> getTransactionDetails(String transactionId) async {
+    await Future.delayed(const Duration(milliseconds: 500));
     return null;
+  }
+  
+  Future<List<WalletTransaction>> searchTransactions(String query) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return [];
   }
   
   Future<WalletStats?> getStats() async {
