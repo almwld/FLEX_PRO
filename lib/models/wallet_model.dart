@@ -148,3 +148,19 @@ class WalletModel {
   double get availableBalance => balance;
   bool hasSufficientBalance(double amount) => balance >= amount;
 }
+
+class OrderTracking {
+  final String id;
+  final String orderId;
+  final String status;
+  final String location;
+  final DateTime timestamp;
+  
+  OrderTracking({
+    required this.id,
+    required this.orderId,
+    required this.status,
+    required this.location,
+    required this.timestamp,
+  });
+}

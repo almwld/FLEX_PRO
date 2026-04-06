@@ -21,7 +21,7 @@ class OrderService {
 
     return List.generate(
       limit,
-      (index) => OrderModel(
+      (index) => OrderModel(tax: 0, 
         id: 'order_${page}_$index',
         userId: 'user_1',
         orderNumber: 'ORD-${DateTime.now().year}-${1000 + index}',
@@ -41,7 +41,7 @@ class OrderService {
         shippingCost: 1000,
         discount: index % 3 == 0 ? 500 : 0,
         total: (index + 1) * 1000.0 + 1000 - (index % 3 == 0 ? 500 : 0),
-        shippingAddress: AddressModel(
+        shippingAddress: AddressModel(street: "", city: "", state: "", zipCode: "", country: "")
           id: 'addr_1',
           userId: 'user_1',
           name: 'محمد أحمد',
@@ -63,7 +63,7 @@ class OrderService {
 
     return List.generate(
       5,
-      (index) => OrderModel(
+      (index) => OrderModel(tax: 0, 
         id: 'order_${status.toString().split('.').last}_$index',
         userId: 'user_1',
         orderNumber: 'ORD-${DateTime.now().year}-${2000 + index}',
@@ -83,7 +83,7 @@ class OrderService {
         shippingCost: 1000,
         discount: 0,
         total: (index + 1) * 1000.0 + 1000,
-        shippingAddress: AddressModel(
+        shippingAddress: AddressModel(street: "", city: "", state: "", zipCode: "", country: "")
           id: 'addr_1',
           userId: 'user_1',
           name: 'محمد أحمد',
@@ -103,7 +103,7 @@ class OrderService {
     // TODO: ربط مع API
     await Future.delayed(const Duration(milliseconds: 500));
 
-    return OrderModel(
+    return OrderModel(tax: 0, 
       id: orderId,
       userId: 'user_1',
       orderNumber: 'ORD-${DateTime.now().year}-9999',
@@ -132,7 +132,7 @@ class OrderService {
       shippingCost: 2000,
       discount: 1000,
       total: 26000,
-      shippingAddress: AddressModel(
+      shippingAddress: AddressModel(street: "", city: "", state: "", zipCode: "", country: "")
         id: 'addr_1',
         userId: 'user_1',
         name: 'محمد أحمد',
@@ -166,7 +166,7 @@ class OrderService {
     final shippingCost = 2000.0;
     final discount = 0.0;
 
-    return OrderModel(
+    return OrderModel(tax: 0, 
       id: 'order_${DateTime.now().millisecondsSinceEpoch}',
       userId: 'user_1',
       orderNumber: 'ORD-${DateTime.now().year}-${DateTime.now().millisecondsSinceEpoch % 10000}',
@@ -216,7 +216,6 @@ class OrderService {
         id: 'track_1',
         orderId: orderId,
         status: 'pending',
-        description: 'تم استلام الطلب',
         location: 'المستودع الرئيسي',
         timestamp: DateTime.now().subtract(const Duration(days: 2)),
       ),
@@ -224,7 +223,6 @@ class OrderService {
         id: 'track_2',
         orderId: orderId,
         status: 'processing',
-        description: 'جاري معالجة الطلب',
         location: 'المستودع الرئيسي',
         timestamp: DateTime.now().subtract(const Duration(days: 1)),
       ),
@@ -232,7 +230,6 @@ class OrderService {
         id: 'track_3',
         orderId: orderId,
         status: 'shipped',
-        description: 'تم شحن الطلب',
         location: 'مركز الشحن',
         timestamp: DateTime.now(),
       ),

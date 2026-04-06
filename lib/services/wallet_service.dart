@@ -25,7 +25,6 @@ class WalletService {
       updatedAt: DateTime.now(),
       limits: WalletLimits.defaultLimits(),
       stats: WalletStats(
-        totalDeposits: 500000,
         totalWithdrawals: 200000,
         totalPayments: 150000,
         totalFees: 5000,
@@ -263,7 +262,6 @@ class WalletService {
       id: 'gift_${DateTime.now().millisecondsSinceEpoch}',
       code: 'FLEX${DateTime.now().millisecondsSinceEpoch}',
       amount: amount,
-      expiryDate: DateTime.now().add(const Duration(days: 365)),
       createdAt: DateTime.now(),
       message: message,
       senderName: recipientName,
@@ -292,7 +290,6 @@ class WalletService {
     await Future.delayed(const Duration(milliseconds: 500));
 
     return WalletStats(
-      totalDeposits: 500000,
       totalWithdrawals: 200000,
       totalPayments: 150000,
       totalFees: 5000,

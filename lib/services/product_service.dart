@@ -111,7 +111,6 @@ class ProductService {
         marketName: 'متجر ${index % 3 + 1}',
         rating: 0,
         reviewCount: 0,
-        isNew: true,
         createdAt: DateTime.now(),
       ),
     );
@@ -200,31 +199,26 @@ class ProductService {
       CategoryModel(
         id: 'cat_1',
         name: 'إلكترونيات',
-        icon: 'electronics',
         createdAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_2',
         name: 'ملابس',
-        icon: 'clothing',
         createdAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_3',
         name: 'أطعمة',
-        icon: 'food',
         createdAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_4',
         name: 'منزل',
-        icon: 'home',
         createdAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_5',
         name: 'رياضة',
-        icon: 'sports',
         createdAt: DateTime.now(),
       ),
     ];
