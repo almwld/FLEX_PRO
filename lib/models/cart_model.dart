@@ -43,11 +43,7 @@ class CartItemModel {
     );
   }
 
-  // ✅ copyWith صحيح
-  CartItemModel copyWith({
-    int? quantity,
-    double? total,
-  }) {
+  CartItemModel copyWith({int? quantity, double? total}) {
     return CartItemModel(
       id: id,
       productId: productId,
@@ -60,6 +56,21 @@ class CartItemModel {
       marketId: marketId,
       marketName: marketName,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'productId': productId,
+      'productName': productName,
+      'productImage': productImage,
+      'price': price,
+      'originalPrice': originalPrice,
+      'quantity': quantity,
+      'total': total,
+      'marketId': marketId,
+      'marketName': marketName,
+    };
   }
 }
 
@@ -101,7 +112,6 @@ class CartModel {
       shippingCost: json['shippingCost']?.toDouble() ?? 0,
     );
   }
-}
 
   Map<String, dynamic> toJson() {
     return {
@@ -115,18 +125,4 @@ class CartModel {
       'shippingCost': shippingCost,
     };
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'productId': productId,
-      'productName': productName,
-      'productImage': productImage,
-      'price': price,
-      'originalPrice': originalPrice,
-      'quantity': quantity,
-      'total': total,
-      'marketId': marketId,
-      'marketName': marketName,
-    };
-  }
+}
