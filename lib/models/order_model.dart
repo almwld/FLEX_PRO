@@ -32,6 +32,8 @@ class OrderModel {
   final DateTime? confirmedAt;
   final DateTime? shippedAt;
   final DateTime? deliveredAt;
+  final String? notes;
+  final String? couponCode;
 
   OrderModel({
     required this.id,
@@ -55,6 +57,8 @@ class OrderModel {
     this.confirmedAt,
     this.shippedAt,
     this.deliveredAt,
+    this.notes,
+    this.couponCode,
   });
 
   Color get statusColor {
@@ -107,10 +111,11 @@ class OrderModel {
       confirmedAt: json['confirmedAt'] != null ? DateTime.parse(json['confirmedAt']) : null,
       shippedAt: json['shippedAt'] != null ? DateTime.parse(json['shippedAt']) : null,
       deliveredAt: json['deliveredAt'] != null ? DateTime.parse(json['deliveredAt']) : null,
+      notes: json['notes'],
+      couponCode: json['couponCode'],
     );
   }
 
-  // ✅ copyWith صحيح
   OrderModel copyWith({
     OrderStatus? status,
     String? cancellationReason,
@@ -137,42 +142,8 @@ class OrderModel {
       confirmedAt: confirmedAt,
       shippedAt: shippedAt,
       deliveredAt: deliveredAt,
+      notes: notes,
+      couponCode: couponCode,
     );
   }
 }
-
-  final String? notes;
-  final String? couponCode;
-  
-  OrderModel({
-    // ... existing fields
-  });
-
-  final String? notes;
-  final String? couponCode;
-
-  OrderModel.withNotes({
-    required this.id,
-    required this.orderNumber,
-    required this.userId,
-    required this.items,
-    required this.subtotal,
-    required this.shippingCost,
-    required this.tax,
-    required this.discount,
-    required this.total,
-    required this.status,
-    required this.shippingAddress,
-    required this.shippingCity,
-    required this.shippingPhone,
-    required this.paymentMethod,
-    required this.paymentMethodText,
-    this.trackingNumber,
-    this.cancellationReason,
-    required this.createdAt,
-    this.confirmedAt,
-    this.shippedAt,
-    this.deliveredAt,
-    this.notes,
-    this.couponCode,
-  });
