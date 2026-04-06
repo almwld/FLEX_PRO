@@ -86,3 +86,41 @@ class OrderModel {
     );
   }
 }
+
+  Color get statusColor {
+    switch (status) {
+      case OrderStatus.pending:
+        return Colors.orange;
+      case OrderStatus.processing:
+        return Colors.blue;
+      case OrderStatus.confirmed:
+        return Colors.green;
+      case OrderStatus.shipped:
+        return Colors.purple;
+      case OrderStatus.delivered:
+        return Colors.teal;
+      case OrderStatus.cancelled:
+        return Colors.red;
+      case OrderStatus.completed:
+        return Colors.green;
+    }
+  }
+
+  String get statusText {
+    switch (status) {
+      case OrderStatus.pending:
+        return 'قيد المراجعة';
+      case OrderStatus.processing:
+        return 'جاري التجهيز';
+      case OrderStatus.confirmed:
+        return 'تم التأكيد';
+      case OrderStatus.shipped:
+        return 'تم الشحن';
+      case OrderStatus.delivered:
+        return 'تم التوصيل';
+      case OrderStatus.cancelled:
+        return 'ملغي';
+      case OrderStatus.completed:
+        return 'مكتمل';
+    }
+  }

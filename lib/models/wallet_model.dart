@@ -96,21 +96,20 @@ class OrderTracking {
   });
 }
 
-class WalletModel {
-  final String id;
-  final double balance;
-  final String currency;
-  final bool isActive;
-
-  WalletModel({required this.id, required this.balance, required this.currency, this.isActive = true});
-}
-
 class WalletBalance {
   final double total;
   final double yerBalance;
   final double sarBalance;
   final double usdBalance;
-  WalletBalance({required this.total, required this.yerBalance, required this.sarBalance, required this.usdBalance});
+  final double available;
+  
+  WalletBalance({
+    required this.total,
+    required this.yerBalance,
+    required this.sarBalance,
+    required this.usdBalance,
+    this.available = 0,
+  });
 }
 
 class BillModel {
@@ -118,7 +117,15 @@ class BillModel {
   final String title;
   final double amount;
   final DateTime dueDate;
-  BillModel({required this.id, required this.title, required this.amount, required this.dueDate});
+  final String? name;
+  
+  BillModel({
+    required this.id,
+    required this.title,
+    required this.amount,
+    required this.dueDate,
+    this.name,
+  });
 }
 
 class GiftCardModel {
@@ -126,27 +133,55 @@ class GiftCardModel {
   final String code;
   final double amount;
   final bool isUsed;
-  GiftCardModel({required this.id, required this.code, required this.amount, this.isUsed = false});
+  final String? currency;
+  
+  GiftCardModel({
+    required this.id,
+    required this.code,
+    required this.amount,
+    this.isUsed = false,
+    this.currency,
+  });
 }
 
 class PaymentMethod {
   final String id;
   final String name;
   final String type;
+  
   PaymentMethod({required this.id, required this.name, required this.type});
+  
+  String toJson() => id;
 }
 
 class WalletStats {
   final double totalSpent;
   final double totalReceived;
   final int transactionCount;
-  WalletStats({required this.totalSpent, required this.totalReceived, required this.transactionCount});
+  final int totalTransactions;
+  
+  WalletStats({
+    required this.totalSpent,
+    required this.totalReceived,
+    required this.transactionCount,
+    this.totalTransactions = 0,
+  });
 }
 
 class WalletLimits {
   final double dailyLimit;
   final double monthlyLimit;
   final double perTransactionLimit;
-  WalletLimits({required this.dailyLimit, required this.monthlyLimit, required this.perTransactionLimit});
-  static WalletLimits defaultLimits() => WalletLimits(dailyLimit: 100000, monthlyLimit: 1000000, perTransactionLimit: 50000);
+  
+  WalletLimits({
+    required this.dailyLimit,
+    required this.monthlyLimit,
+    required this.perTransactionLimit,
+  });
+  
+  static WalletLimits defaultLimits() => WalletLimits(
+    dailyLimit: 100000,
+    monthlyLimit: 1000000,
+    perTransactionLimit: 50000,
+  );
 }
