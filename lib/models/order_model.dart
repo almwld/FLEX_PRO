@@ -15,6 +15,7 @@ enum OrderStatus {
 /// نموذج الطلب
 class OrderModel {
   final String id;
+  final String orderNumber;
   final String userId;
   final List<OrderItem> items;
   final double subtotal;
@@ -29,6 +30,8 @@ class OrderModel {
   final String? shippingPhone;
   final String? shippingCompany;
   final String? trackingNumber;
+  final String paymentMethodText;
+  final String? cancellationReason;
   final DateTime createdAt;
   final DateTime? confirmedAt;
   final DateTime? shippedAt;
@@ -380,6 +383,7 @@ final List<OrderModel> sampleOrders = [
     tax: 0,
     total: 455000,
     status: OrderStatus.delivered,
+  OrderStatus.completed,
     shippingAddress: 'شارع حدة، مبنى رقم 10',
     shippingCity: 'صنعاء',
     shippingPhone: '777123456',

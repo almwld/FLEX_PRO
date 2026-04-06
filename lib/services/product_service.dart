@@ -25,7 +25,7 @@ class ProductService {
       limit,
       (index) => ProductModel(
         id: 'prod_${page}_$index',
-        name: 'منتج تجريبي ${index + 1}',
+        productName: 'منتج تجريبي ${index + 1}',
         description: 'وصف المنتج التجريبي ${index + 1}',
         price: (index + 1) * 1000.0,
         discountPrice: index % 3 == 0 ? (index + 1) * 800.0 : null,
@@ -49,7 +49,7 @@ class ProductService {
 
     return ProductModel(
       id: productId,
-      name: 'منتج تجريبي',
+      productName: 'منتج تجريبي',
       description: 'وصف تفصيلي للمنتج التجريبي',
       price: 10000,
       discountPrice: 8000,
@@ -79,7 +79,7 @@ class ProductService {
       10,
       (index) => ProductModel(
         id: 'featured_$index',
-        name: 'منتج مميز ${index + 1}',
+        productName: 'منتج مميز ${index + 1}',
         description: 'وصف المنتج المميز',
         price: (index + 1) * 5000.0,
         discountPrice: index % 2 == 0 ? (index + 1) * 4000.0 : null,
@@ -106,7 +106,7 @@ class ProductService {
       10,
       (index) => ProductModel(
         id: 'new_$index',
-        name: 'منتج جديد ${index + 1}',
+        productName: 'منتج جديد ${index + 1}',
         description: 'وصف المنتج الجديد',
         price: (index + 1) * 3000.0,
         images: ['https://via.placeholder.com/300'],
@@ -132,7 +132,7 @@ class ProductService {
       10,
       (index) => ProductModel(
         id: 'search_$index',
-        name: 'نتيجة بحث: $query ${index + 1}',
+        productName: 'نتيجة بحث: $query ${index + 1}',
         description: 'وصف نتيجة البحث',
         price: (index + 1) * 2000.0,
         images: ['https://via.placeholder.com/300'],
@@ -157,7 +157,7 @@ class ProductService {
       10,
       (index) => ProductModel(
         id: 'market_${marketId}_$index',
-        name: 'منتج المتجر $index',
+        productName: 'منتج المتجر $index',
         description: 'وصف منتج المتجر',
         price: (index + 1) * 1000.0,
         images: ['https://via.placeholder.com/300'],
@@ -182,7 +182,7 @@ class ProductService {
       5,
       (index) => ProductModel(
         id: 'similar_${productId}_$index',
-        name: 'منتج مشابه ${index + 1}',
+        productName: 'منتج مشابه ${index + 1}',
         description: 'وصف المنتج المشابه',
         price: (index + 1) * 1500.0,
         images: ['https://via.placeholder.com/300'],
@@ -208,35 +208,35 @@ class ProductService {
     return [
       CategoryModel(
         id: 'cat_1',
-        name: 'إلكترونيات',
+        productName: 'إلكترونيات',
         icon: 'electronics',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_2',
-        name: 'ملابس',
+        productName: 'ملابس',
         icon: 'clothing',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_3',
-        name: 'أطعمة',
+        productName: 'أطعمة',
         icon: 'food',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_4',
-        name: 'منزل',
+        productName: 'منزل',
         icon: 'home',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_5',
-        name: 'رياضة',
+        productName: 'رياضة',
         icon: 'sports',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),

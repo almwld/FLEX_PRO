@@ -245,6 +245,7 @@ class OrderProvider extends ChangeNotifier {
           break;
         case OrderStatus.delivered:
         case OrderStatus.completed:
+        case OrderStatus.completed:
           _completedOrders = orders;
           break;
         default:

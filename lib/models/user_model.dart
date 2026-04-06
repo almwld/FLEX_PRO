@@ -9,6 +9,7 @@ class UserModel {
   final String? avatarUrl;
   final String userType; // customer, merchant, guest
   final DateTime? createdAt;
+  final DateTime? updatedAt;
   final bool isVerified;
   final bool isGuest;
   final ViewMode viewMode;

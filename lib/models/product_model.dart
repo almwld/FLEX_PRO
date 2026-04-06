@@ -3,9 +3,21 @@ import 'dart:convert';
 /// نموذج المنتج
 class ProductModel {
   final String id;
+  final String name;
+  final String name;
   final String title;
   final String description;
   final double price;
+  final double? discountPrice;
+  final bool hasDiscount;
+  final bool isFavorite;
+  final double? discountPrice;
+  final bool hasDiscount;
+  final bool isFavorite;
+  final String? marketId;
+  final String? marketName;
+  final int stockQuantity;
+  final bool isInStock;
   final double? originalPrice;
   final List<String> images;
   final String category;

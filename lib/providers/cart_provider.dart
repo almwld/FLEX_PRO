@@ -74,7 +74,7 @@ class CartProvider extends ChangeNotifier {
   int getProductQuantity(String productId) {
     final item = _items.firstWhere(
       (item) => item.productId == productId,
-      orElse: () => CartItemModel(
+      orElse: () => CartItemModel.fromProduct(
         id: '',
         productId: '',
         productName: '',
