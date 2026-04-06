@@ -9,14 +9,21 @@ class WalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final walletProvider = context.watch<WalletProvider>();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
         title: const Text('محفظتي'),
         backgroundColor: AppColors.goldColor,
         foregroundColor: Colors.black,
         centerTitle: true,
+        actions: [
+          Icon(Icons.history, color: Colors.black),
+          const SizedBox(width: 16),
+          Icon(Icons.settings_outlined, color: Colors.black),
+          const SizedBox(width: 16),
+        ],
       ),
       body: walletProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -25,6 +32,8 @@ class WalletScreen extends StatelessWidget {
               child: Column(
                 children: [
                   _BalanceCard(balance: walletProvider.balance),
+                  const SizedBox(height: 24),
+                  _QuickActions(),
                   const SizedBox(height: 24),
                   const Text(
                     'Flex Yemen - محفظتك الرقمية الآمنة',
@@ -39,9 +48,8 @@ class WalletScreen extends StatelessWidget {
 
 class _BalanceCard extends StatelessWidget {
   final double balance;
-  
   const _BalanceCard({required this.balance});
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,34 +63,52 @@ class _BalanceCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'الرصيد الإجمالي',
-            style: TextStyle(color: Colors.white70),
-          ),
+          const Text('الرصيد الإجمالي', style: TextStyle(color: Colors.white70)),
           const SizedBox(height: 8),
           Text(
             '${balance.toStringAsFixed(0)} ر.ي',
-            style: const TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildActionButton(Icons.arrow_downward, 'إيداع', () {}),
-              _buildActionButton(Icons.arrow_upward, 'سحب', () {}),
-              _buildActionButton(Icons.swap_horiz, 'تحويل', () {}),
+              _ActionButton(Icons.arrow_downward, 'إيداع', () {}),
+              _ActionButton(Icons.arrow_upward, 'سحب', () {}),
+              _ActionButton(Icons.swap_horiz, 'تحويل', () {}),
             ],
           ),
         ],
       ),
     );
   }
-  
-  Widget _buildActionButton(IconData icon, String label, VoidCallback onTap) {
+}
+
+class _QuickActions extends StatelessWidget {
+  const _QuickActions();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _ServiceItem(Icons.receipt, 'فواتير'),
+        _ServiceItem(Icons.phone_android, 'شحن'),
+        _ServiceItem(Icons.card_giftcard, 'هدايا'),
+        _ServiceItem(Icons.tv, 'ترفيه'),
+      ],
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+  const _ActionButton(this.icon, this.label, this.onTap);
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -100,6 +126,31 @@ class _BalanceCard extends StatelessWidget {
           Text(label, style: const TextStyle(color: Colors.white70)),
         ],
       ),
+    );
+  }
+}
+
+class _ServiceItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  const _ServiceItem(this.icon, this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            color: AppColors.goldColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(icon, color: AppColors.goldColor),
+        ),
+        const SizedBox(height: 8),
+        Text(label, style: const TextStyle(fontSize: 12)),
+      ],
     );
   }
 }
