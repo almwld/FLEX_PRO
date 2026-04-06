@@ -69,24 +69,19 @@ class MyApp extends StatelessWidget {
         // الـ Providers
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(
-            storageService: context.read<LocalStorageService>(),
           ),
         ),
         ChangeNotifierProvider(
           create: (context) => AuthProvider(
             authService: context.read<AuthService>(),
-            storageService: context.read<LocalStorageService>(),
           ),
         ),
         ChangeNotifierProvider(
           create: (context) => WalletProvider(
-            walletService: context.read<WalletService>(),
-            storageService: context.read<LocalStorageService>(),
           ),
         ),
         ChangeNotifierProvider(
           create: (context) => CartProvider(
-            storageService: context.read<LocalStorageService>(),
           ),
         ),
         ChangeNotifierProvider(

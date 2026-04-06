@@ -244,3 +244,9 @@ class WalletProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+  Future<void> loadTransactions() async {
+    await _loadTransactions();
+  }
+
+  double get availableBalance => balance;

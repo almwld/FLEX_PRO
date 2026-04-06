@@ -27,3 +27,25 @@ class CategoryModel {
     'parentId': parentId,
   };
 }
+
+  IconData get iconData {
+    switch (name) {
+      case 'إلكترونيات': return Icons.electrical_services;
+      case 'ملابس': return Icons.checkroom;
+      case 'أطعمة': return Icons.restaurant;
+      case 'منزل': return Icons.home;
+      case 'رياضة': return Icons.sports_soccer;
+      default: return Icons.category;
+    }
+  }
+
+  IconData get iconData {
+    switch (name) {
+      case 'إلكترونيات': return Icons.electrical_services;
+      case 'ملابس': return Icons.checkroom;
+      case 'أطعمة': return Icons.restaurant;
+      case 'منزل': return Icons.home;
+      case 'رياضة': return Icons.sports_soccer;
+      default: return Icons.category;
+    }
+  }
