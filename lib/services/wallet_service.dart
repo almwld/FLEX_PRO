@@ -26,7 +26,7 @@ class WalletService {
     return null;
   }
   
-  Future<WalletTransaction?> transfer(double amount, String recipient) async {
+  Future<WalletTransaction?> transfer(double amount, String recipient, {String? description, String? pin}) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return null;
   }
@@ -36,7 +36,7 @@ class WalletService {
     return [];
   }
   
-  Future<WalletTransaction?> payBill(String billId) async {
+  Future<WalletTransaction?> payBill(String billId, {String? walletId, String? pin}) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return null;
   }

@@ -138,7 +138,6 @@ class WalletProvider extends ChangeNotifier {
     _clearError();
     try {
       final transaction = await _walletService.deposit(
-        amount: amount,
         method: method,
         metadata: metadata,
       );
@@ -175,7 +174,6 @@ class WalletProvider extends ChangeNotifier {
       }
 
       final transaction = await _walletService.withdraw(
-        amount: amount,
         method: method,
         metadata: metadata,
       );
@@ -196,7 +194,7 @@ class WalletProvider extends ChangeNotifier {
   }
 
   /// تحويل
-  Future<bool> transfer({
+  Future<bool> transfer(amount, recipient, description: description, pin: pin){
     required double amount,
     required String recipientPhone,
     String? note,
@@ -211,8 +209,7 @@ class WalletProvider extends ChangeNotifier {
         return false;
       }
 
-      final transaction = await _walletService.transfer(
-        amount: amount,
+      final transaction = await _walletService.transfer(amount, recipient, description: description, pin: pin)
         recipientPhone: recipientPhone,
         note: note,
       );
@@ -233,7 +230,7 @@ class WalletProvider extends ChangeNotifier {
   }
 
   /// دفع فاتورة
-  Future<bool> payBill({
+  Future<bool> payBill(billId, walletId: walletId, pin: pin){
     required String billId,
     required double amount,
   }) async {
@@ -247,9 +244,8 @@ class WalletProvider extends ChangeNotifier {
         return false;
       }
 
-      final transaction = await _walletService.payBill(
+      final transaction = await _walletService.payBill(billId, walletId: walletId, pin: pin)
         billId: billId,
-        amount: amount,
       );
 
       if (transaction != null) {
@@ -300,7 +296,6 @@ class WalletProvider extends ChangeNotifier {
       }
 
       final giftCard = await _walletService.buyGiftCard(amount, 
-        amount: amount,
         message: message,
         recipientName: recipientName,
       );

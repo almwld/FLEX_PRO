@@ -79,7 +79,6 @@ class ProductProvider extends ChangeNotifier {
         limit: limit,
         categoryId: categoryId,
         
-        filters: filters,
       );
 
       if (products.isNotEmpty) {
