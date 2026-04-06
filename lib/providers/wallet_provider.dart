@@ -30,7 +30,6 @@ class WalletProvider extends ChangeNotifier {
   
   String getFormattedTotalBalance() => '${balance.toStringAsFixed(0)} ر.ي';
   
-  Future<void> loadWallet() async {
     _status = WalletStatus.loading;
     notifyListeners();
     
@@ -54,7 +53,6 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.deposit(amount, method);
       if (result != null) {
-        await loadWallet();
         return true;
       }
       return false;
@@ -80,7 +78,6 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.withdraw(amount, method);
       if (result != null) {
-        await loadWallet();
         return true;
       }
       return false;
@@ -106,7 +103,6 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.transfer(amount, recipient);
       if (result != null) {
-        await loadWallet();
         return true;
       }
       return false;
@@ -132,7 +128,6 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.payBill(billId);
       if (result != null) {
-        await loadWallet();
         return true;
       }
       return false;
@@ -151,7 +146,6 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.buyGiftCard(amount);
       if (result != null) {
-        await loadWallet();
         return result;
       }
       return null;
@@ -170,7 +164,6 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.redeemGiftCard(code);
       if (result) {
-        await loadWallet();
         return true;
       }
       return false;
@@ -190,6 +183,9 @@ class WalletProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+  Future<void> loadTransactions() async {
+  }
 
   Future<void> loadTransactions() async {
     await loadWallet();

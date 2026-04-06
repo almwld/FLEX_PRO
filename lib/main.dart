@@ -20,32 +20,23 @@ class FlexYemenApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => ThemeProvider(storageService: LocalStorageService()),
+          create: (context) => ThemeProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => AuthProvider(storageService: LocalStorageService()),
+          create: (context) => AuthProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => WalletProvider()..loadWallet(),
         ),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, child) {
-          return MaterialApp(
-            title: 'Flex Yemen',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData.light().copyWith(
-              primaryColor: const Color(0xFFD4AF37),
-              colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFD4AF37)),
-            ),
-            darkTheme: ThemeData.dark().copyWith(
-              primaryColor: const Color(0xFFD4AF37),
-              colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFD4AF37)),
-            ),
-            themeMode: themeProvider.themeMode,
-            home: const WalletScreen(),
-          );
-        },
+      child: MaterialApp(
+        title: 'Flex Yemen',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.light().copyWith(
+          primaryColor: const Color(0xFFD4AF37),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFD4AF37)),
+        ),
+        home: const WalletScreen(),
       ),
     );
   }
