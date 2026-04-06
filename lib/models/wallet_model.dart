@@ -113,7 +113,7 @@ class PaymentMethod {
   final String name;
   final String type;
   PaymentMethod({required this.id, required this.name, required this.type});
-  static const wallet = PaymentMethod(id: 'wallet', name: 'محفظة فلكس', type: 'wallet');
+  static PaymentMethod get wallet => PaymentMethod(id: 'wallet', name: 'محفظة فلكس', type: 'wallet');
 }
 
 class WalletStats {
@@ -158,4 +158,8 @@ class OrderTracking {
     required this.timestamp,
     this.description,
   });
+}
+
+extension PaymentMethodExtension on PaymentMethod {
+  String toJson() => id;
 }

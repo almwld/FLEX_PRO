@@ -17,17 +17,14 @@ class WalletService {
 
     return WalletModel(
       id: 'wallet_1',
-      userId: 'user_1',
       balance: 150000,
       frozenBalance: 0,
-      currency: 'YER',
       isActive: true,
       isVerified: true,
       createdAt: DateTime.now().subtract(const Duration(days: 365)),
       updatedAt: DateTime.now(),
       limits: WalletLimits.defaultLimits(),
       stats: WalletStats(
-        totalTransactions: 150,
         totalDeposits: 500000,
         totalWithdrawals: 200000,
         totalPayments: 150000,
@@ -44,10 +41,8 @@ class WalletService {
 
     return WalletBalance(
       total: 150000,
-      available: 150000,
       frozen: 0,
       pending: 0,
-      currency: 'YER',
     );
   }
 
@@ -70,12 +65,10 @@ class WalletService {
       (index) => WalletTransaction(
         id: 'txn_${page}_$index',
         walletId: 'wallet_1',
-        userId: 'user_1',
         type: TransactionType.values[index % TransactionType.values.length],
         status: TransactionStatus.completed,
         amount: (index + 1) * 1000.0,
         fee: index % 3 == 0 ? 50 : 0,
-        currency: 'YER',
         description: 'معاملة تجريبية ${index + 1}',
         createdAt: DateTime.now().subtract(Duration(days: index)),
         title: 'معاملة ${index + 1}',
@@ -92,12 +85,10 @@ class WalletService {
     return WalletTransaction(
       id: transactionId,
       walletId: 'wallet_1',
-      userId: 'user_1',
       type: TransactionType.deposit,
       status: TransactionStatus.completed,
       amount: 10000,
       fee: 0,
-      currency: 'YER',
       description: 'تفاصيل المعاملة',
       createdAt: DateTime.now(),
       title: 'إيداع',
@@ -126,12 +117,10 @@ class WalletService {
     return WalletTransaction(
       id: 'txn_deposit_${DateTime.now().millisecondsSinceEpoch}',
       walletId: 'wallet_1',
-      userId: 'user_1',
       type: TransactionType.deposit,
       status: TransactionStatus.completed,
       amount: amount,
       fee: 0,
-      currency: 'YER',
       paymentMethod: method.toJson(),
       description: 'إيداع مبلغ $amount',
       createdAt: DateTime.now(),
@@ -152,12 +141,10 @@ class WalletService {
     return WalletTransaction(
       id: 'txn_withdraw_${DateTime.now().millisecondsSinceEpoch}',
       walletId: 'wallet_1',
-      userId: 'user_1',
       type: TransactionType.withdraw,
       status: TransactionStatus.completed,
       amount: amount,
       fee: 100,
-      currency: 'YER',
       paymentMethod: method.toJson(),
       description: 'سحب مبلغ $amount',
       createdAt: DateTime.now(),
@@ -178,13 +165,11 @@ class WalletService {
     return WalletTransaction(
       id: 'txn_transfer_${DateTime.now().millisecondsSinceEpoch}',
       walletId: 'wallet_1',
-      userId: 'user_1',
       recipientId: recipientPhone,
       type: TransactionType.transfer,
       status: TransactionStatus.completed,
       amount: amount,
       fee: 50,
-      currency: 'YER',
       description: note ?? 'تحويل إلى $recipientPhone',
       createdAt: DateTime.now(),
       title: 'تحويل',
@@ -202,7 +187,6 @@ class WalletService {
     return [
       BillModel(
         id: 'bill_1',
-        name: 'فاتورة الكهرباء',
         category: BillCategory.electricity,
         accountNumber: '123456789',
         amount: 15000,
@@ -211,7 +195,6 @@ class WalletService {
       ),
       BillModel(
         id: 'bill_2',
-        name: 'فاتورة الماء',
         category: BillCategory.water,
         accountNumber: '987654321',
         amount: 5000,
@@ -220,7 +203,6 @@ class WalletService {
       ),
       BillModel(
         id: 'bill_3',
-        name: 'فاتورة الإنترنت',
         category: BillCategory.internet,
         accountNumber: '555555555',
         amount: 12000,
@@ -241,12 +223,10 @@ class WalletService {
     return WalletTransaction(
       id: 'txn_bill_${DateTime.now().millisecondsSinceEpoch}',
       walletId: 'wallet_1',
-      userId: 'user_1',
       type: TransactionType.billPayment,
       status: TransactionStatus.completed,
       amount: amount,
       fee: 0,
-      currency: 'YER',
       description: 'دفع فاتورة $billId',
       createdAt: DateTime.now(),
       title: 'دفع فاتورة',
@@ -283,7 +263,6 @@ class WalletService {
       id: 'gift_${DateTime.now().millisecondsSinceEpoch}',
       code: 'FLEX${DateTime.now().millisecondsSinceEpoch}',
       amount: amount,
-      currency: 'YER',
       expiryDate: DateTime.now().add(const Duration(days: 365)),
       createdAt: DateTime.now(),
       message: message,
@@ -313,7 +292,6 @@ class WalletService {
     await Future.delayed(const Duration(milliseconds: 500));
 
     return WalletStats(
-      totalTransactions: 150,
       totalDeposits: 500000,
       totalWithdrawals: 200000,
       totalPayments: 150000,

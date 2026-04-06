@@ -37,7 +37,6 @@ class ProductService {
         rating: 3.5 + (index % 2),
         reviewCount: 10 + index,
         createdAt: DateTime.now().subtract(Duration(days: index)),
-        updatedAt: DateTime.now(),
       ),
     );
   }
@@ -60,13 +59,11 @@ class ProductService {
       ],
       stockQuantity: 50,
       categoryId: 'cat_1',
-      categoryName: 'فئة 1',
       marketId: 'market_1',
       marketName: 'متجر 1',
       rating: 4.5,
       reviewCount: 25,
       createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
     );
   }
 
@@ -90,9 +87,7 @@ class ProductService {
         marketName: 'متجر ${index % 3 + 1}',
         rating: 4.0 + (index % 2),
         reviewCount: 20 + index,
-        isFeatured: true,
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
     );
   }
@@ -118,7 +113,6 @@ class ProductService {
         reviewCount: 0,
         isNew: true,
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
     );
   }
@@ -143,7 +137,6 @@ class ProductService {
         rating: 3.5 + (index % 2),
         reviewCount: 10 + index,
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
     );
   }
@@ -168,7 +161,6 @@ class ProductService {
         rating: 4.0,
         reviewCount: 15,
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
     );
   }
@@ -193,7 +185,6 @@ class ProductService {
         rating: 4.0,
         reviewCount: 10,
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
     );
   }
@@ -211,35 +202,30 @@ class ProductService {
         name: 'إلكترونيات',
         icon: 'electronics',
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_2',
         name: 'ملابس',
         icon: 'clothing',
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_3',
         name: 'أطعمة',
         icon: 'food',
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_4',
         name: 'منزل',
         icon: 'home',
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
       CategoryModel(
         id: 'cat_5',
         name: 'رياضة',
         icon: 'sports',
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       ),
     ];
   }
