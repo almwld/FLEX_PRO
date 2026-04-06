@@ -106,3 +106,7 @@ class ProductModel {
     );
   }
 }
+
+  String get productName => name;
+
+  String get productName => name;

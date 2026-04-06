@@ -102,3 +102,31 @@ class CartModel {
     );
   }
 }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'userId': userId,
+      'items': items.map((i) => i.toJson()).toList(),
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+      'couponCode': couponCode,
+      'discountAmount': discountAmount,
+      'shippingCost': shippingCost,
+    };
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'productId': productId,
+      'productName': productName,
+      'productImage': productImage,
+      'price': price,
+      'originalPrice': originalPrice,
+      'quantity': quantity,
+      'total': total,
+      'marketId': marketId,
+      'marketName': marketName,
+    };
+  }

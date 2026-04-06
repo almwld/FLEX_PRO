@@ -161,6 +161,7 @@ class WalletStats {
   final int totalTransactions;
   
   WalletStats({
+    this.totalDeposits = 0,
     required this.totalSpent,
     required this.totalReceived,
     required this.transactionCount,
@@ -198,4 +199,52 @@ class WalletModel {
     required this.currency,
     this.isActive = true,
   });
+}
+
+// إضافة الدوال المفقودة
+extension WalletModelExtension on WalletModel {
+  double get availableBalance => balance;
+  bool hasSufficientBalance(double amount) => balance >= amount;
+}
+
+class WalletStats {
+  final double totalSpent;
+  final double totalReceived;
+  final int transactionCount;
+  final int totalTransactions;
+  final double totalDeposits;
+  
+  WalletStats({
+    required this.totalSpent,
+    required this.totalReceived,
+    required this.transactionCount,
+    this.totalTransactions = 0,
+    this.totalDeposits = 0,
+  });
+}
+
+class OrderTracking {
+  final String id;
+  final String orderId;
+  final String status;
+  final String location;
+  final DateTime timestamp;
+  final String? description;
+  
+  OrderTracking({
+    required this.id,
+    required this.orderId,
+    required this.status,
+    required this.location,
+    required this.timestamp,
+    this.description,
+  });
+}
+
+extension PaymentMethodValues on PaymentMethod {
+  static const wallet = PaymentMethod(id: 'wallet', name: 'محفظة فلكس', type: 'wallet');
+}
+
+extension PaymentMethodValues on PaymentMethod {
+  static const wallet = PaymentMethod(id: 'wallet', name: 'محفظة فلكس', type: 'wallet');
 }

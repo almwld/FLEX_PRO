@@ -140,3 +140,12 @@ class OrderModel {
     );
   }
 }
+
+  final String? notes;
+  final String? couponCode;
+  
+  OrderModel({
+    // ... existing fields
+    this.notes,
+    this.couponCode,
+  });

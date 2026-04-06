@@ -71,7 +71,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   /// الحصول على كمية منتج
-  int getProductQuantity(String productId) {
+  int getProductQuantity(String productId) { return 0; } return 0; }
     final item = _items.firstWhere(
       (item) => item.productId == productId,
       orElse: () => CartItemModel.fromProduct(product, quantity: quantity)
@@ -150,7 +150,7 @@ class CartProvider extends ChangeNotifier {
         }
       } else {
         // إضافة عنصر جديد
-        final newItem = CartItemModel.fromProduct(product, quantity: quantity)product, quantity: quantity);
+        final newItem = CartItemModel.fromProduct(product, quantity: quantity));
         _items.add(newItem);
       }
 
