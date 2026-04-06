@@ -7,6 +7,7 @@ enum WalletStatus { initial, loading, loaded, error, processing }
 class WalletProvider extends ChangeNotifier {
   final WalletService _walletService = WalletService();
   
+  // Private state
   WalletStatus _status = WalletStatus.initial;
   String? _errorMessage;
   WalletModel? _wallet;
@@ -14,6 +15,7 @@ class WalletProvider extends ChangeNotifier {
   List<BillModel> _bills = [];
   List<GiftCardModel> _giftCards = [];
   
+  // Getters
   WalletStatus get status => _status;
   String? get errorMessage => _errorMessage;
   WalletModel? get wallet => _wallet;
@@ -23,13 +25,14 @@ class WalletProvider extends ChangeNotifier {
   bool get isLoading => _status == WalletStatus.loading;
   
   double get balance => _wallet?.balance ?? 0;
-  double get availableBalance => _wallet?.balance ?? 0;
   double get yerBalance => 15000;
   double get sarBalance => 1000;
   double get usdBalance => 100;
   
   String getFormattedTotalBalance() => '${balance.toStringAsFixed(0)} ر.ي';
   
+  // Load wallet data
+  Future<void> loadWallet() async {
     _status = WalletStatus.loading;
     notifyListeners();
     
@@ -46,6 +49,11 @@ class WalletProvider extends ChangeNotifier {
     notifyListeners();
   }
   
+  Future<void> loadTransactions() async {
+    await loadWallet();
+  }
+  
+  // Deposit
   Future<bool> deposit(double amount, dynamic method) async {
     _status = WalletStatus.processing;
     notifyListeners();
@@ -53,6 +61,7 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.deposit(amount, method);
       if (result != null) {
+        await loadWallet();
         return true;
       }
       return false;
@@ -64,6 +73,7 @@ class WalletProvider extends ChangeNotifier {
     }
   }
   
+  // Withdraw
   Future<bool> withdraw(double amount, dynamic method) async {
     if (_wallet != null && _wallet!.balance < amount) {
       _errorMessage = 'رصيد غير كافٍ';
@@ -78,6 +88,7 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.withdraw(amount, method);
       if (result != null) {
+        await loadWallet();
         return true;
       }
       return false;
@@ -89,6 +100,7 @@ class WalletProvider extends ChangeNotifier {
     }
   }
   
+  // Transfer
   Future<bool> transfer(double amount, String recipient, {String? note}) async {
     if (_wallet != null && _wallet!.balance < amount) {
       _errorMessage = 'رصيد غير كافٍ';
@@ -103,6 +115,7 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.transfer(amount, recipient);
       if (result != null) {
+        await loadWallet();
         return true;
       }
       return false;
@@ -114,6 +127,7 @@ class WalletProvider extends ChangeNotifier {
     }
   }
   
+  // Pay bill
   Future<bool> payBill(String billId, double amount) async {
     if (_wallet != null && _wallet!.balance < amount) {
       _errorMessage = 'رصيد غير كافٍ';
@@ -128,6 +142,7 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.payBill(billId);
       if (result != null) {
+        await loadWallet();
         return true;
       }
       return false;
@@ -139,6 +154,7 @@ class WalletProvider extends ChangeNotifier {
     }
   }
   
+  // Gift cards
   Future<GiftCardModel?> buyGiftCard(double amount) async {
     _status = WalletStatus.processing;
     notifyListeners();
@@ -146,6 +162,7 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.buyGiftCard(amount);
       if (result != null) {
+        await loadWallet();
         return result;
       }
       return null;
@@ -164,6 +181,7 @@ class WalletProvider extends ChangeNotifier {
     try {
       final result = await _walletService.redeemGiftCard(code);
       if (result) {
+        await loadWallet();
         return true;
       }
       return false;
@@ -175,6 +193,7 @@ class WalletProvider extends ChangeNotifier {
     }
   }
   
+  // Clear error
   void clearError() {
     _errorMessage = null;
     if (_status == WalletStatus.error) {
@@ -183,9 +202,3 @@ class WalletProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-
-
-  Future<void> loadTransactions() async {
-    await loadWallet();
-  }
