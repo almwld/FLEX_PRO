@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'smart_agent.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SmartAgent().init();
   runApp(const MyApp());
 }
 
@@ -39,7 +37,6 @@ class _ChatScreenState extends State<ChatScreen> {
       _controller.clear();
       _isLoading = true;
     });
-    final agent = SmartAgent();
     final response = await agent.respond(text);
     setState(() {
       _messages.add({'isUser': false, 'content': response, 'time': DateTime.now()});
