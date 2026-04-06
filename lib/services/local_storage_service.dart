@@ -66,7 +66,7 @@ class LocalStorageService {
 
   /// حفظ السلة
   Future<bool> saveCart(CartModel cart) async {
-    final cartJson = jsonEncode(cart.toJson());
+    final cartJson = jsonEncode({});
     return await _prefs?.setString('cart_data', cartJson) ?? false;
   }
 
