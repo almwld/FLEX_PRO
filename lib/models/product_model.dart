@@ -82,3 +82,26 @@ class ProductModel {
     'createdAt': createdAt.toIso8601String(),
   };
 }
+
+  ProductModel copyWith({
+    bool? isFavorite,
+  }) {
+    return ProductModel(
+      id: id,
+      name: name,
+      description: description,
+      price: price,
+      discountPrice: discountPrice,
+      hasDiscount: hasDiscount,
+      isFavorite: isFavorite ?? this.isFavorite,
+      images: images,
+      categoryId: categoryId,
+      marketId: marketId,
+      marketName: marketName,
+      stockQuantity: stockQuantity,
+      isInStock: isInStock,
+      rating: rating,
+      reviewCount: reviewCount,
+      createdAt: createdAt,
+    );
+  }

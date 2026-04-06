@@ -124,3 +124,34 @@ class OrderModel {
         return 'مكتمل';
     }
   }
+
+  OrderModel copyWith({
+    String? id,
+    String? orderNumber,
+    OrderStatus? status,
+    String? cancellationReason,
+  }) {
+    return OrderModel(
+      id: id ?? this.id,
+      orderNumber: orderNumber ?? this.orderNumber,
+      userId: userId,
+      items: items,
+      subtotal: subtotal,
+      shippingCost: shippingCost,
+      tax: tax,
+      discount: discount,
+      total: total,
+      status: status ?? this.status,
+      shippingAddress: shippingAddress,
+      shippingCity: shippingCity,
+      shippingPhone: shippingPhone,
+      paymentMethod: paymentMethod,
+      paymentMethodText: paymentMethodText,
+      trackingNumber: trackingNumber,
+      cancellationReason: cancellationReason ?? this.cancellationReason,
+      createdAt: createdAt,
+      confirmedAt: confirmedAt,
+      shippedAt: shippedAt,
+      deliveredAt: deliveredAt,
+    );
+  }

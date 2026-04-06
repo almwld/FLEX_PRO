@@ -1,131 +1,187 @@
-import 'wallet_balance.dart';
-import 'wallet_transaction.dart';
+import 'package:flutter/material.dart';
 
-class WalletModel {
+enum TransactionType { deposit, withdraw, transfer, payment, received, refund, billPayment }
+enum TransactionStatus { pending, processing, completed, failed, cancelled }
+
+class WalletTransaction {
   final String id;
+  final String walletId;
   final String userId;
-  final List<WalletBalance> balances;
-  final bool isActive;
-  final bool isVerified;
+  final TransactionType type;
+  final TransactionStatus status;
+  final double amount;
+  final double fee;
+  final String currency;
   final DateTime createdAt;
-  final DateTime? lastActivity;
-  final String? pinCode;
-  final bool biometricEnabled;
-  final double dailyLimit;
-  final double monthlyLimit;
-  final List<String> linkedBanks;
-  final List<String> linkedCards;
-  
-  WalletModel({
+  final String title;
+  final String subtitle;
+  final String? description;
+  final String? recipientId;
+  final String? paymentMethod;
+
+  WalletTransaction({
     required this.id,
+    required this.walletId,
     required this.userId,
-    required this.balances,
-    this.isActive = true,
-    this.isVerified = false,
+    required this.type,
+    required this.status,
+    required this.amount,
+    required this.fee,
+    required this.currency,
     required this.createdAt,
-    this.lastActivity,
-    this.pinCode,
-    this.biometricEnabled = false,
-    this.dailyLimit = 1000000,
-    this.monthlyLimit = 10000000,
-    this.linkedBanks = const [],
-    this.linkedCards = const [],
+    required this.title,
+    required this.subtitle,
+    this.description,
+    this.recipientId,
+    this.paymentMethod,
   });
-  
-  factory WalletModel.fromJson(Map<String, dynamic> json) {
-    return WalletModel(
-      id: json['id'] ?? '',
-      userId: json['user_id'] ?? '',
-      balances: (json['balances'] as List?)
-          ?.map((e) => WalletBalance.fromJson(e))
-          .toList() ?? [],
-      isActive: json['is_active'] ?? true,
-      isVerified: json['is_verified'] ?? false,
-      createdAt: DateTime.parse(json['created_at'] ?? DateTime.now().toIso8601String()),
-      lastActivity: json['last_activity'] != null 
-          ? DateTime.parse(json['last_activity']) 
-          : null,
-      pinCode: json['pin_code'],
-      biometricEnabled: json['biometric_enabled'] ?? false,
-      dailyLimit: (json['daily_limit'] ?? 1000000).toDouble(),
-      monthlyLimit: (json['monthly_limit'] ?? 10000000).toDouble(),
-      linkedBanks: List<String>.from(json['linked_banks'] ?? []),
-      linkedCards: List<String>.from(json['linked_cards'] ?? []),
-    );
+
+  bool get isIncoming => type == TransactionType.received || type == TransactionType.deposit;
+  bool get isOutgoing => type == TransactionType.withdraw || type == TransactionType.transfer || type == TransactionType.payment;
+
+  Color get transactionColor {
+    if (isIncoming) return Colors.green;
+    if (isOutgoing) return Colors.red;
+    return Colors.orange;
   }
-  
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'user_id': userId,
-      'balances': balances.map((e) => e.toJson()).toList(),
-      'is_active': isActive,
-      'is_verified': isVerified,
-      'created_at': createdAt.toIso8601String(),
-      'last_activity': lastActivity?.toIso8601String(),
-      'pin_code': pinCode,
-      'biometric_enabled': biometricEnabled,
-      'daily_limit': dailyLimit,
-      'monthly_limit': monthlyLimit,
-      'linked_banks': linkedBanks,
-      'linked_cards': linkedCards,
-    };
-  }
-  
-  // الحصول على رصيد عملة معينة
-  WalletBalance? getBalance(String currency) {
-    try {
-      return balances.firstWhere((b) => b.currency == currency);
-    } catch (e) {
-      return null;
+
+  IconData get transactionIcon {
+    switch (type) {
+      case TransactionType.deposit: return Icons.arrow_downward;
+      case TransactionType.withdraw: return Icons.arrow_upward;
+      case TransactionType.transfer: return Icons.swap_horiz;
+      case TransactionType.payment: return Icons.payment;
+      case TransactionType.received: return Icons.receipt;
+      case TransactionType.refund: return Icons.refresh;
+      case TransactionType.billPayment: return Icons.receipt_long;
     }
   }
-  
-  // إجمالي الرصيد بالريال اليمني
-  double get totalBalanceYER {
-    return balances.fold(0, (sum, b) {
-      if (b.currency == 'YER') return sum + b.amount;
-      if (b.currency == 'SAR') return sum + (b.amount * 66.5);
-      if (b.currency == 'USD') return sum + (b.amount * 250);
-      return sum;
-    });
+
+  String get typeText {
+    switch (type) {
+      case TransactionType.deposit: return 'إيداع';
+      case TransactionType.withdraw: return 'سحب';
+      case TransactionType.transfer: return 'تحويل';
+      case TransactionType.payment: return 'دفع';
+      case TransactionType.received: return 'استلام';
+      case TransactionType.refund: return 'استرداد';
+      case TransactionType.billPayment: return 'دفع فاتورة';
+    }
   }
-  
-  // التحقق من وجود رصيد كافٍ
-  bool hasSufficientBalance(String currency, double amount) {
-    final balance = getBalance(currency);
-    return balance != null && balance.availableAmount >= amount;
+
+  String get statusText {
+    switch (status) {
+      case TransactionStatus.pending: return 'قيد المعالجة';
+      case TransactionStatus.processing: return 'جاري التنفيذ';
+      case TransactionStatus.completed: return 'مكتمل';
+      case TransactionStatus.failed: return 'فشل';
+      case TransactionStatus.cancelled: return 'ملغي';
+    }
   }
+}
+
+class OrderTracking {
+  final String id;
+  final String orderId;
+  final String status;
+  final String location;
+  final DateTime timestamp;
+
+  OrderTracking({
+    required this.id,
+    required this.orderId,
+    required this.status,
+    required this.location,
+    required this.timestamp,
+  });
+}
+
+class WalletBalance {
+  final double total;
+  final double yerBalance;
+  final double sarBalance;
+  final double usdBalance;
+  final double available;
   
-  WalletModel copyWith({
-    String? id,
-    String? userId,
-    List<WalletBalance>? balances,
-    bool? isActive,
-    bool? isVerified,
-    DateTime? createdAt,
-    DateTime? lastActivity,
-    String? pinCode,
-    bool? biometricEnabled,
-    double? dailyLimit,
-    double? monthlyLimit,
-    List<String>? linkedBanks,
-    List<String>? linkedCards,
-  }) {
-    return WalletModel(
-      id: id ?? this.id,
-      userId: userId ?? this.userId,
-      balances: balances ?? this.balances,
-      isActive: isActive ?? this.isActive,
-      isVerified: isVerified ?? this.isVerified,
-      createdAt: createdAt ?? this.createdAt,
-      lastActivity: lastActivity ?? this.lastActivity,
-      pinCode: pinCode ?? this.pinCode,
-      biometricEnabled: biometricEnabled ?? this.biometricEnabled,
-      dailyLimit: dailyLimit ?? this.dailyLimit,
-      monthlyLimit: monthlyLimit ?? this.monthlyLimit,
-      linkedBanks: linkedBanks ?? this.linkedBanks,
-      linkedCards: linkedCards ?? this.linkedCards,
-    );
-  }
+  WalletBalance({
+    required this.total,
+    required this.yerBalance,
+    required this.sarBalance,
+    required this.usdBalance,
+    this.available = 0,
+  });
+}
+
+class BillModel {
+  final String id;
+  final String title;
+  final double amount;
+  final DateTime dueDate;
+  final String? name;
+  
+  BillModel({
+    required this.id,
+    required this.title,
+    required this.amount,
+    required this.dueDate,
+    this.name,
+  });
+}
+
+class GiftCardModel {
+  final String id;
+  final String code;
+  final double amount;
+  final bool isUsed;
+  final String? currency;
+  
+  GiftCardModel({
+    required this.id,
+    required this.code,
+    required this.amount,
+    this.isUsed = false,
+    this.currency,
+  });
+}
+
+class PaymentMethod {
+  final String id;
+  final String name;
+  final String type;
+  
+  PaymentMethod({required this.id, required this.name, required this.type});
+  
+  String toJson() => id;
+}
+
+class WalletStats {
+  final double totalSpent;
+  final double totalReceived;
+  final int transactionCount;
+  final int totalTransactions;
+  
+  WalletStats({
+    required this.totalSpent,
+    required this.totalReceived,
+    required this.transactionCount,
+    this.totalTransactions = 0,
+  });
+}
+
+class WalletLimits {
+  final double dailyLimit;
+  final double monthlyLimit;
+  final double perTransactionLimit;
+  
+  WalletLimits({
+    required this.dailyLimit,
+    required this.monthlyLimit,
+    required this.perTransactionLimit,
+  });
+  
+  static WalletLimits defaultLimits() => WalletLimits(
+    dailyLimit: 100000,
+    monthlyLimit: 1000000,
+    perTransactionLimit: 50000,
+  );
 }
