@@ -280,11 +280,6 @@ class WalletProvider extends ChangeNotifier {
   }
 
   /// شراء بطاقة هدايا
-  Future<GiftCardModel?> buyGiftCard(amount, {
-    required double amount,
-    String? message,
-    String? recipientName,
-  }) async {
     _setProcessing();
     _clearError();
     try {
@@ -296,7 +291,6 @@ class WalletProvider extends ChangeNotifier {
       }
 
       final giftCard = await _walletService.buyGiftCard(amount, 
-        message: message,
         recipientName: recipientName,
       );
 
